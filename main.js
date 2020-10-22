@@ -12,9 +12,7 @@ let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
 const printBoard = () =>  {
-  for (let i = 0; i < board.length; i++) {
-    console.log(board[i]);
-  }
+  console.log("Your current moves", board)
 }
 
 const generateSolution = () =>  {
@@ -39,7 +37,7 @@ const getRandomInt = (min, max) => {
 const generateHint = (guess) =>  {
   
   // Create a variable correctLetterLocations and set it to 0
-  let correctLetterLocations = 0;
+  let correctLocation = 0;
   // Set a variable correctLetters equal to 0 
   let correctLetters = 0;
 
@@ -51,9 +49,9 @@ const generateHint = (guess) =>  {
   
   // In a for loop, iterate over the solutionArray, comparing each index of solutionArray against the same index of guessArray. 
   // If the item matches, increment correctLetterLocations, and set that index in solutionArray to null.
-  for(let i = 0; i < solutionArray.length; i++){
+  for(let i = 0; i < solutionArray.length; i ++){
     if(solutionArray[i] == guessArray[i]){
-      correctLetterLocations = correctLetterLocations + 1;
+      correctLocation = correctLocation + 1;
       solutionArray[i] = null;
     }
   };
@@ -66,12 +64,12 @@ const generateHint = (guess) =>  {
   for(let i = 0; i < solutionArray.length; i++){
     let targetIndex = solutionArray.indexOf(guessArray[i]);
     if(targetIndex > -1){
-      correctLetterLocations = correctLetterLocations + 1;
-      solutionArray[targetIndex] = null;
+      correctLetters = correctLetters + 1;
+      solutionArray[targetIndex] = null
     }
   }
-  let userhint = correctLetterLocations.toString() + "-" + correctLetters.toString();
-  return userhint
+  let hint = correctLocation.toString() + "-" + correctLetters.toString();
+  return hint
 };
 
 // Spec 1 - Detect a correct solution: In mastermind(), if the guess you passed in equals the solution, 
@@ -86,7 +84,7 @@ const mastermind = (guess) => {
           console.log('You guessed it!');
           return 'You guessed it!';
         } else {
-          board.push(guess + ' hint is' + generateHint(guess))
+          board.push('You guessed', guess + '. Your hint is ' + generateHint(guess))
           console.log("Guess Again Please")
         }
   }
